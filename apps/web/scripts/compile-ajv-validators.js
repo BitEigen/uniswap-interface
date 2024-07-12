@@ -10,6 +10,7 @@ const schema = require('@uniswap/token-lists/dist/tokenlist.schema.json')
 const tokenListAjv = new Ajv({ code: { source: true, esm: true } })
 addFormats(tokenListAjv)
 const validateTokenList = tokenListAjv.compile(schema)
+fs.mkdirSync(path.join(__dirname, '../src/utils/__generated__'), { recursive: true })
 let tokenListModuleCode = standaloneCode(tokenListAjv, validateTokenList)
 fs.writeFileSync(path.join(__dirname, '../src/utils/__generated__/validateTokenList.js'), tokenListModuleCode)
 
