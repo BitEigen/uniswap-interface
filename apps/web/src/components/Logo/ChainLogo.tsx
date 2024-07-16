@@ -118,7 +118,18 @@ export function getChainUI(chainId: InterfaceChainId, darkMode: boolean): ChainU
             textColor: '#3667F6',
           }
     default:
-      return undefined
+      // return undefined
+      return darkMode
+        ? {
+            symbol: ZKSYNC_LOGO,
+            bgColor: 'rgba(97, 137, 255, 0.12)',
+            textColor: '#6189FF',
+          }
+        : {
+            symbol: ZKSYNC_LOGO,
+            bgColor: 'rgba(54, 103, 246, 0.12)',
+            textColor: '#3667F6',
+          }
   }
 }
 

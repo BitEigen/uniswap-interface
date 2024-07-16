@@ -140,7 +140,9 @@ export const CHAIN_NAME_TO_CHAIN_ID = Object.fromEntries(
 ) as { [chain in InterfaceGqlChain]: SupportedInterfaceChainId }
 
 export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = Object.keys(UNIVERSE_CHAIN_INFO)
-  .filter((key) => UNIVERSE_CHAIN_INFO[parseInt(key) as SupportedInterfaceChainId].supportsGasEstimates)
+  .filter((key) => {
+    return UNIVERSE_CHAIN_INFO[parseInt(key) as SupportedInterfaceChainId].supportsGasEstimates
+  })
   .map((key) => parseInt(key) as SupportedInterfaceChainId)
 
 export const TESTNET_CHAIN_IDS = Object.keys(UNIVERSE_CHAIN_INFO)

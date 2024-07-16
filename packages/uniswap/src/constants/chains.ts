@@ -99,6 +99,7 @@ export const L2_CHAIN_IDS = [
   UniverseChainId.Blast,
   UniverseChainId.Zora,
   UniverseChainId.Zksync,
+  UniverseChainId.BitEigen,
 ] as const
 
 export type L2ChainId = (typeof L2_CHAIN_IDS)[number]
@@ -1068,4 +1069,59 @@ export const UNIVERSE_CHAIN_INFO: ChainInfo = {
       address: '0x5AEa5775959fBC2557Cc8789bC1bf90A239D9a91',
     },
   } as const satisfies L2ChainInfo,
+  [UniverseChainId.BitEigen]: {
+    ...zkSync,
+    id: UniverseChainId.BitEigen,
+    sdkId: 1022,
+    assetRepoNetworkName: 'zksync',
+    backendChain: {
+      chain: BackendChainId.BitEigen as InterfaceGqlChain,
+      backendSupported: false,
+      isSecondaryChain: false,
+      nativeTokenBackendAddress: undefined,
+    },
+    blockPerMainnetEpochForChainId: 12,
+    blockWaitMsBeforeWarning: 600000,
+    bridge: 'https://portal.zksync.io/bridge/',
+    chainPriority: 10,
+    docs: 'https://docs.zksync.io/',
+    elementName: ElementName.ChainBitEigen,
+    explorer: {
+      name: 'ZKsync Explorer',
+      url: 'https://explorer-testnet.biteigen.xyz/',
+      apiURL: 'https://explorer-testnet.biteigen.xyz/api',
+    },
+    helpCenterUrl: undefined,
+    infoLink: 'https://app.uniswap.org/explore/tokens/zksync',
+    infuraPrefix: undefined,
+    interfaceName: 'biteigen',
+    label: 'BitEigen',
+    logo: ZKSYNC_LOGO,
+    nativeCurrency: {
+      name: 'ZKsync ETH',
+      symbol: 'ETH',
+      decimals: 18,
+      address: DEFAULT_NATIVE_ADDRESS,
+    },
+    networkLayer: NetworkLayer.L2,
+    pendingTransactionsRetryOptions: undefined,
+    rpcUrls: {
+      [RPCType.Public]: { http: [config.quicknodeZkSyncRpcUrl] },
+      default: { http: ['https://rpc-testnet.biteigen.xyz'] },
+      appOnly: { http: [config.quicknodeZkSyncRpcUrl] },
+    },
+    urlParam: 'biteigen',
+    statusPage: undefined,
+    spotPriceStablecoinAmount: CurrencyAmount.fromRawAmount(USDC_ZKSYNC, 10_000e6),
+    stablecoins: [USDC_ZKSYNC],
+    supportsClientSideRouting: false,
+    supportsGasEstimates: false,
+    wrappedNativeCurrency: {
+      name: 'Wrapped Ether',
+      symbol: 'WETH',
+      decimals: 18,
+      address: '0x5AEa5775959fBC2557Cc8789bC1bf90A239D9a91',
+    },
+  } as const satisfies L2ChainInfo,
 }
+

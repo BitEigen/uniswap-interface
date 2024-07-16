@@ -111,6 +111,7 @@ export const ElementName = {
   ChainBlast: 'chain-blast',
   ChainZora: 'chain-zora',
   ChainZkSync: 'chain-zksync',
+  ChainBitEigen: 'chain-biteigen',
   ChooseInputToken: 'choose-input-token',
   ChooseOutputToken: 'choose-output-token',
   Confirm: 'confirm',
