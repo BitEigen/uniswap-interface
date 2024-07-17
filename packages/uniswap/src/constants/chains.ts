@@ -1081,10 +1081,10 @@ export const UNIVERSE_CHAIN_INFO: ChainInfo = {
       },
     },
     id: UniverseChainId.BitEigen,
-    sdkId: 1022,
+    sdkId: 1022 as UniswapSDKChainId,
     assetRepoNetworkName: 'zksync',
     backendChain: {
-      chain: BackendChainId.BitEigen as InterfaceGqlChain,
+      chain: BackendChainId.Biteigen as InterfaceGqlChain,
       backendSupported: false,
       isSecondaryChain: false,
       nativeTokenBackendAddress: undefined,
