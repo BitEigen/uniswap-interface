@@ -1070,7 +1070,16 @@ export const UNIVERSE_CHAIN_INFO: ChainInfo = {
     },
   } as const satisfies L2ChainInfo,
   [UniverseChainId.BitEigen]: {
-    ...zkSync,
+    name: 'BitEigen',
+    blockExplorers: {
+      default: { name: 'Explorer', url: 'https://explorer.zora.energy' },
+    },
+    contracts: {
+      multicall3: {
+        address: '0xcA11bde05977b3631167028862bE2a173976CA11',
+        blockCreated: 5882,
+      },
+    },
     id: UniverseChainId.BitEigen,
     sdkId: 1022,
     assetRepoNetworkName: 'zksync',
@@ -1120,7 +1129,7 @@ export const UNIVERSE_CHAIN_INFO: ChainInfo = {
       name: 'Wrapped Ether',
       symbol: 'WETH',
       decimals: 18,
-      address: '0x5AEa5775959fBC2557Cc8789bC1bf90A239D9a91',
+      address: '0x81850632f76E7ceeB606773c3827e351D5A8438b',
     },
   } as const satisfies L2ChainInfo,
 }
