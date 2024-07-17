@@ -1091,7 +1091,7 @@ export const UNIVERSE_CHAIN_INFO: ChainInfo = {
     },
     blockPerMainnetEpochForChainId: 12,
     blockWaitMsBeforeWarning: 600000,
-    bridge: 'https://portal.zksync.io/bridge/',
+    bridge: 'https://bridge-testnet.biteigen.xyz/',
     chainPriority: 10,
     docs: 'https://docs.zksync.io/',
     elementName: ElementName.ChainBitEigen,

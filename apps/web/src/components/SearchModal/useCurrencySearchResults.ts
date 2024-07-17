@@ -15,10 +15,14 @@ import { UserAddedToken } from 'types/tokens'
 import {
   Chain,
   Token as GqlToken,
+  SafetyLevel,
   TokenSortableField,
+  TokenStandard,
+  TopTokensQuery,
   useSearchTokensWebQuery,
   useTopTokensQuery,
 } from 'uniswap/src/data/graphql/uniswap-data-api/__generated__/types-and-hooks'
+import { UniverseChainId } from 'uniswap/src/types/chains'
 import { isSameAddress } from 'utilities/src/addresses'
 import { currencyKey } from 'utils/currencyKey'
 
@@ -65,15 +69,68 @@ export function useCurrencySearchResults({
     },
     skip: !searchQuery,
   })
-  const { data: popularTokens, loading: popularTokensLoading } = useTopTokensQuery({
-    fetchPolicy: 'cache-first',
-    variables: {
-      chain: chainIdToBackendChain({ chainId: supportedChain, withFallback: true }) ?? Chain.Ethereum,
-      orderBy: TokenSortableField.Popularity,
-      page: 1,
-      pageSize: 100,
-    },
-  })
+  let popularTokens: TopTokensQuery | undefined = {
+    topTokens: [
+      {
+        __typename: "Token",
+        id: "VG9rZW46RVRIRVJFVU1fMHhjMDJhYWEzOWIyMjNmZThkMGEwZTVjNGYyN2VhZDkwODNjNzU2Y2My",
+        address: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        chain: Chain.BitEigen,
+        symbol: "USDT",
+        name: "Tether",
+        decimals: 18,
+        standard: TokenStandard.Erc20,
+        project: {
+          __typename: "TokenProject",
+          id: "VG9rZW5Qcm9qZWN0OkVUSEVSRVVNXzB4YzAyYWFhMzliMjIzZmU4ZDBhMGU1YzRmMjdlYWQ5MDgzYzc1NmNjMl9XRVRI",
+          name: "USDT",
+          logo: {
+            __typename: "Image",
+            id: "SW1hZ2U6aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1VuaXN3YXAvYXNzZXRzL21hc3Rlci9ibG9ja2NoYWlucy9ldGhlcmV1bS9hc3NldHMvMHhDMDJhYUEzOWIyMjNGRThEMEEwZTVDNEYyN2VBRDkwODNDNzU2Q2MyL2xvZ28ucG5n",
+            url: "https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+          },
+          safetyLevel: SafetyLevel.Verified,
+          logoUrl: "https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png",
+          isSpam: false
+        }
+      },
+      {
+        __typename: "Token",
+        id: "VG9rZW46RVRIRVJFVU1fMHhjMDJhYWEzOWIyMjNmZThkMGEwZTVjNGYyN2VhZDkwODNjNzU2Y2Mz",
+        address: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc1",
+        chain: Chain.BitEigen,
+        symbol: "USDC",
+        name: "UsdCoin",
+        decimals: 18,
+        standard: TokenStandard.Erc20,
+        project: {
+          __typename: "TokenProject",
+          id: "VG9rZW5Qcm9qZWN0OkVUSEVSRVVNXzB4YzAyYWFhMzliMjIzZmU4ZDBhMGU1YzRmMjdlYWQ5MDgzYzc1NmNjMl9XRVRI",
+          name: "USDC",
+          logo: {
+            __typename: "Image",
+            id: "SW1hZ2U6aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1VuaXN3YXAvYXNzZXRzL21hc3Rlci9ibG9ja2NoYWlucy9ldGhlcmV1bS9hc3NldHMvMHhDMDJhYUEzOWIyMjNGRThEMEEwZTVDNEYyN2VBRDkwODNDNzU2Q2MyL2xvZ28ucG5n",
+            url: "https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+          },
+          safetyLevel: SafetyLevel.Verified,
+          logoUrl: "https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png",
+          isSpam: false
+        }
+      }
+    ]
+  };
+  let popularTokensLoading: boolean = false;
+  if (chainId !== UniverseChainId.BitEigen) {
+    ({ data: popularTokens, loading: popularTokensLoading } = useTopTokensQuery({
+      fetchPolicy: 'cache-first',
+      variables: {
+        chain: chainIdToBackendChain({ chainId: supportedChain, withFallback: true }) ?? Chain.Ethereum,
+        orderBy: TokenSortableField.Popularity,
+        page: 1,
+        pageSize: 100,
+      },
+    }))
+  }
   const sortedPopularTokens = useMemo(() => {
     if (!popularTokens?.topTokens) {
       return undefined

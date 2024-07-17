@@ -295,12 +295,21 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
   )
 
   const maximumAmountIn = useMaxAmountIn(trade, allowedSlippage)
+  // const allowance = usePermit2Allowance(
+  //   maximumAmountIn ??
+  //     (parsedAmounts[Field.INPUT]?.currency.isToken
+  //       ? (parsedAmounts[Field.INPUT] as CurrencyAmount<Token>)
+  //       : undefined),
+  //   supportedChainId ? UNIVERSAL_ROUTER_ADDRESS(supportedChainId) : undefined,
+  //   trade?.fillType,
+  // )
+
   const allowance = usePermit2Allowance(
     maximumAmountIn ??
       (parsedAmounts[Field.INPUT]?.currency.isToken
         ? (parsedAmounts[Field.INPUT] as CurrencyAmount<Token>)
         : undefined),
-    supportedChainId ? UNIVERSAL_ROUTER_ADDRESS(supportedChainId) : undefined,
+    supportedChainId ? "0x04b43eB529011818b4c764458dA2886b95Edf111" : undefined,
     trade?.fillType,
   )
 
