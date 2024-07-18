@@ -303,6 +303,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
   //   supportedChainId ? UNIVERSAL_ROUTER_ADDRESS(supportedChainId) : undefined,
   //   trade?.fillType,
   // )
+  console.log("trade: ", trade)
 
   const allowance = usePermit2Allowance(
     maximumAmountIn ??

@@ -188,6 +188,7 @@ enum Chain {
   ZORA
   ZKSYNC
   UNKNOWN_CHAIN
+  BITEIGEN
 }
 
 enum CollectionSortableField {
